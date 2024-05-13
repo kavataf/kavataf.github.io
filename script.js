@@ -87,3 +87,29 @@ $(function() {
     });
     
 });
+const form = document.querySelector("#form");
+const Name = document.querySelector(".name");
+const email = document.querySelector(".email");
+const message = document.querySelector(".message");
+
+const messagebody = `name: ${Name.value} <br> email: ${email.value} <br> message: ${message.value}`;
+
+function emailsend(){
+
+    Email.send({
+        Host : "smtp.elasticemail.com",
+        Username : "kavatafaith412@gmail.com",
+        Password : "C6361C3D4FAEB9D960AF8D053311DB2B94C4",
+        To : 'kavatafaith412@gmail.com',
+        From : "kavatafaith412@gmail.com", 
+        Body : messagebody
+    }).then(
+      message => alert(message = "Message sent successfully!")
+      
+    );
+}
+
+form.addEventListener("submit", function(e){
+    e.preventDefault();
+    emailsend();
+});
