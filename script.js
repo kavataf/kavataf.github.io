@@ -104,7 +104,7 @@ function emailsend(){
         From : "kavatafaith412@gmail.com", 
         Body : messagebody
     }).then(
-      message => alert(message = "Message sent successfully!")
+      message => alert(message = "Message not sent successfully!")
       
     );
 }
