@@ -35,11 +35,9 @@
     <link href="style.css" rel="stylesheet">
     <link href="responsive.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
 
 </head>
 <body>
@@ -81,23 +79,29 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-md-6">
-                    <h1>Faith Kavata</h1>
-                    <div class="page-scroll">
-                        <p class="job-title">Software Developer</p>
-                        <a href="#contact" class="btn btn-fill ">Contact</a>
-                        <div class="clearfix visible-xxs"></div>
-                        <a href="#portfolio" class="btn btn-border">Explore more</a>
-                    </div>
+            <div class="col-md-6" data-aos="fade-right">
+                <h1 data-aos="fade-down" data-aos-delay="200">Faith Kavata</h1>
+                <div class="page-scroll">
+                <p class="job-title" data-aos="fade-up" data-aos-delay="400">Software Developer</p>
+                <a href="#contact" class="btn btn-fill" data-aos="zoom-in" data-aos-delay="600">Contact</a>
+                <div class="clearfix visible-xxs"></div>
+                <a href="#portfolio" class="btn btn-border" data-aos="zoom-in" data-aos-delay="800">Explore more</a>
                 </div>
-            
-                <div class="col-md-6 text-right">
-                    <img src="#" alt="">
-                </div>
+            </div>
+
+            <!-- <div class="col-md-6 text-right" data-aos="fade-left">
+                <img src="html.png" class="icon html" alt="HTML">
+                <img src="css.png" class="icon css" alt="CSS">
+                <img src="js.png" class="icon js" alt="JavaScript">
+                <img src="react.png" class="icon react" alt="React">
+                <img src="php.png" class="icon php" alt="PHP">
+                <img src="flutter.png" class="icon flutter" alt="Flutter">
+            </div> -->
 
             </div>
         </div>
-    </div><!-- /.hero -->
+    </div>
+<!-- /.hero -->
 
     <main id="main" class="site-main">
 
@@ -107,10 +111,11 @@
                     <div class="col-md-6 col-md-offset-3">
                         <h2>About</h2>
                         <img src="lines.svg" class="img-lines" alt="lines">
-                        <p>Hello! I'm Faith, a Software developer, with a knack for creating visually stunning and highly functional web applications. 
-                            I specialize in building seamless user interfaces that deliver exceptional user experiences.
-                             I’m currently available for freelance work. If you have a project that you want to get started or think you need my help with something, then get in touch.</p>
-                        <a href="RESUME.pdf" class="btn btn-fill" target="_blank" download>Download my cv</a>
+                        <p>Hi, I’m Faith, a recent Software Development graduate skilled in building responsive and user-focused web applications.
+                             I specialize in modern front-end technologies including HTML, CSS, 
+                             JavaScript, React, PHP and Flutter apps, with a strong eye for clean design and usability.
+                             Let’s connect.</p>
+                        <a href="FAITHRESUME.pdf" class="btn btn-fill" target="_blank" download>Download my cv</a>
                     </div>
                 </div>
             </div>
@@ -127,11 +132,11 @@
                         <div class="skill">
                             <h4>Html/css</h4>
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" data-transitiongoal="100"></div><!-- /.progress-bar -->
+                                <div class="progress-bar" role="progressbar" data-transitiongoal="95"></div><!-- /.progress-bar -->
                             </div><!-- /.progress -->
                         </div><!-- /.skill -->
                         <div class="skill">
-                            <h4>Python</h4>
+                            <h4>Flutter</h4>
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar" data-transitiongoal="80"></div><!-- /.progress-bar -->
                             </div><!-- /.progress -->
@@ -144,12 +149,7 @@
                                 <div class="progress-bar" role="progressbar" data-transitiongoal="75"></div><!-- /.progress-bar -->
                             </div><!-- /.progress -->
                         </div><!-- /.skill -->
-                        <!--<div class="skill">
-                            <h4></h4>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" data-transitiongoal="66"></div>
-                            </div>
-                        </div>--><!-- /.skill -->
+                        
                     </div>
                     <div class="col-md-4">
                         <div class="skill">
@@ -159,7 +159,7 @@
                             </div><!-- /.progress -->
                         </div><!-- /.skill -->
                         <div class="skill">
-                            <h4>Java</h4>
+                            <h4>Python</h4>
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar" data-transitiongoal="70"></div><!-- /.progress-bar -->
                             </div><!-- /.progress -->
@@ -192,9 +192,12 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="service">
-                            <img src="consultancy.svg" alt="Coding">
-                            <h4>Programming</h4>
-                            <p>I offer a range of services including backend development, frontend development, scripting and automation, and debugging and maintenance.</p>
+                            <img src="flutter.png" height="50px" width="50px">
+                            <h4>Flutter App Dev</h4>
+                            <p>I specialize in building cross-platform mobile applications using Flutter, 
+                                focusing on responsive UI design, smooth performance, state management, 
+                                and integration with backend services. 
+                                I also offer app maintenance, debugging, and feature enhancements.</p>
                         </div><!-- /.service -->
                     </div>
                 </div>
@@ -301,7 +304,9 @@
                         <ul class="list-group">
                         <li class="list-group-item"><strong>Name:</strong> Faith Kavata</li>
                         <li class="list-group-item"><strong>Email:</strong> kavatafaith412@gmail.com</li>
-                        <li class="list-group-item"><strong>Message:</strong> Available for freelance projects. Let's build something amazing together!</li>
+                        <!-- <li class="list-group-item">
+                            <strong>Message:</strong> 
+                            Available for freelance projects. Let's build something amazing together!</li> -->
                         </ul>
                     </div>
                 </div>
@@ -331,23 +336,7 @@
     </footer><!-- /#footer -->
 
     <!-- Modals -->
-    <!-- <div id="portfolioItem1" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
-            <img class="img-res" src="e commerce.jpg" alt="">
-          </div>
-          <div class="modal-body">
-            <h4 class="modal-title">E-Commerce Website</h4>
-            <p>This e-commerce website is a comprehensive platform for online shopping, allowing users to browse, search, add items to their cart, and complete a secure checkout process. Key features include a product catalog, search and filter, shopping cart, checkout process, user authentication, order history, and responsive design. Technologies used include HTML, CSS, JavaScript. Challenges faced during development include performance optimization, security, and integrating external APIs.</p>
-          </div>
-          <div class="modal-footer">
-            <a href="https://github.com/kavataf/greypln" class="btn btn-fill">Visit Page</a>
-          </div>
-        </div>
-      </div>
-    </div> -->
+   
 
     <div id="portfolioItem2" class="modal fade" role="dialog">
       <div class="modal-dialog">
@@ -386,23 +375,6 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <!-- <div id="portfolioItem4" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
-            <img class="img-res" src="portfolio.jpg" alt="">
-          </div>
-          <div class="modal-body">
-            <h4 class="modal-title">responsive portfolio</h4>
-            <p>This portfolio website showcases the author's work, skills, and experience in a visually appealing and user-friendly format. It adapts to different devices, providing an optimal viewing experience. Key features include an introduction, a gallery of projects, a list of technical skills, and contact information. The website uses front-end frameworks like JavaScript and CSS. </p>
-          </div>
-          <div class="modal-footer">
-            <a href="https://github.com/kavataf/kavataf.github.io" class="btn btn-fill">Visit Page</a>
-          </div>
-        </div>
-      </div>
-    </div> -->
 
     <div id="portfolioItem5" class="modal fade" role="dialog">
       <div class="modal-dialog">
@@ -426,24 +398,7 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <!-- <div id="portfolioItem6" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
-            <img class="img-res" src="portfolio-6.jpg" alt="">
-          </div>
-          <div class="modal-body">
-            <h4 class="modal-title">Weather App</h4>
-            <p>The weather app offers real-time weather information and forecasts to help users plan their days. Key features include real-time weather, forecasts, location-based weather, and weather icons. The app is designed to work seamlessly on various devices and allows users to convert units of measurement. The app uses front-end technologies like React, Angular, and CSS frameworks. Challenges include ensuring accurate data retrieval, implementing error handling, and optimizing performance through techniques like caching or lazy loading.</p>
-          </div>
-          <div class="modal-footer">
-            <a href="#" class="btn btn-fill">Visit Page</a>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
+    
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -457,5 +412,14 @@
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+    AOS.init({
+        duration: 1200,
+        once: true
+    });
+    </script>
+
+
 </body>
 </html>
