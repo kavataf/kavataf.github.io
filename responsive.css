@@ -101,7 +101,7 @@
 	}
 
 	.section-services .container {
-		padding: 70px 90px;
+		padding: 30px 90px;
 	}
 	
 	.service h4 {
@@ -160,11 +160,7 @@
 	/* HEADER
 	================================================== */
 	.site-logo {
-		padding-left: 15px;
-	}
-
-	.site-logo img {
-		height: 22px;
+		padding-left: 15px;	
 	}
 
 	/* Navigation */
@@ -294,17 +290,23 @@
 	/* HERO
 	================================================== */
 	.hero .col-md-6:first-child {
-		top: 30%;
+		top: 24%;
 	}
 
 	.hero h1 {
-		font-size: 32px
+		font-size: 32px;
 		margin-bottom: 10px;
 	}
 
 	.job-title {
 		font-size: 18px;
 		margin-bottom: 20px;
+	}
+
+	.job-subtitle {
+		font-size: 16px;
+		margin-bottom: 20px;
+		line-height: 1.5;
 	}
 
 	.hero img {
