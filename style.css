@@ -349,8 +349,8 @@ html, body {
 
 .site-section h2,
 .site-section h3 {
-    font-size: 36px;
-    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
 }
 
 .img-lines {
@@ -360,6 +360,109 @@ html, body {
 .site-section p {
     margin-bottom: 35px;
 }
+.about-image-wrapper{
+    height: 400px;
+    max-width: 400px;
+    margin: 0 auto 30px;
+}
+.about-image{
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+    filter: brightness(70%);
+}
+
+.about-content{
+    margin: 0 auto;
+}
+
+/* Location */
+.location {
+    text-align: start;
+    width: 25%;
+    color: #666;
+    background-color: #E4F8FE;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.location i {
+    color: #0179CC;
+    margin-right: 6px;
+}
+
+/* Professional title */
+.professional-title {
+    text-align: start;
+    color: black;
+    margin-bottom: 10px;
+}
+.brief-description{
+    text-align: start;
+    color: #2f2f2f;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Skills */
+.my-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 10px;
+}
+
+.about-skill {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* Different skill backgrounds */
+.about-skill.javascript {
+    background: rgba(247, 223, 30, 0.25);
+    color: #806f00;
+    border-color: rgba(247, 223, 30, 0.35);
+}
+
+.about-skill.react {
+    background: rgba(97, 218, 251, 0.18);
+    color: #1685a3;
+    border-color: rgba(97, 218, 251, 0.3);
+}
+
+.about-skill.php {
+    background: rgba(119, 123, 179, 0.18);
+    color: #5d6195;
+    border-color: rgba(119, 123, 179, 0.3);
+}
+
+.about-skill.node {
+    background: rgba(67, 133, 61, 0.15);
+    color: #367331;
+    border-color: rgba(67, 133, 61, 0.25);
+}
+
+.about-skill.flutter {
+    background: rgba(2, 86, 155, 0.15);
+    color: #02569b;
+    border-color: rgba(2, 86, 155, 0.25);
+}
+
+.about-skill.databases {
+    background: rgba(0, 117, 143, 0.15);
+    color: #006b82;
+    border-color: rgba(0, 117, 143, 0.25);
+}
+
+.download-cv{
+    margin: 0 0 10px;
+}
+
 
 /* Section: Skills */
 .section-skills {
