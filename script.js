@@ -1,3 +1,4 @@
+console.log("Process JavaScript loaded!");
 $(function() {
 
     $('.navbar-toggle').click(function() {
@@ -87,29 +88,164 @@ $(function() {
     });
     
 });
-const form = document.querySelector("#form");
-const Name = document.querySelector(".name");
-const email = document.querySelector(".email");
-const message = document.querySelector(".message");
+// const form = document.querySelector("#form");
+// const Name = document.querySelector(".name");
+// const email = document.querySelector(".email");
+// const message = document.querySelector(".message");
 
-const messagebody = `name: ${Name.value} <br> email: ${email.value} <br> message: ${message.value}`;
+// const messagebody = `name: ${Name.value} <br> email: ${email.value} <br> message: ${message.value}`;
 
-function emailsend(){
+// function emailsend(){
 
-    Email.send({
-        Host : "smtp.elasticemail.com",
-        Username : "kavatafaith412@gmail.com",
-        Password : "C6361C3D4FAEB9D960AF8D053311DB2B94C4",
-        To : 'kavatafaith412@gmail.com',
-        From : "kavatafaith412@gmail.com", 
-        Body : messagebody
-    }).then(
-      message => alert(message = "Message not sent successfully!")
+//     Email.send({
+//         Host : "smtp.elasticemail.com",
+//         Username : "kavatafaith412@gmail.com",
+//         Password : "C6361C3D4FAEB9D960AF8D053311DB2B94C4",
+//         To : 'kavatafaith412@gmail.com',
+//         From : "kavatafaith412@gmail.com", 
+//         Body : messagebody
+//     }).then(
+//       message => alert(message = "Message not sent successfully!")
       
-    );
+//     );
+// }
+
+// form.addEventListener("submit", function(e){
+//     e.preventDefault();
+//     emailsend();
+// });
+
+
+// process stack 
+
+const processSteps = [
+    {
+        number: "01",
+        title: "Problem",
+        description:
+            "I start by understanding the problem, the users, their needs and the goals of the project before writing any code.",
+        tag: "Understand requirements"
+    },
+
+    {
+        number: "02",
+        title: "Research & Design",
+        description:
+            "I research the requirements and create a clear structure for the solution. I use wireframes and user flows to plan the experience.",
+        tag: "Plan the user experience"
+    },
+
+    {
+        number: "03",
+        title: "Data",
+        description:
+            "I identify the data, APIs and information required by the system and determine how they should be structured and managed.",
+        tag: "Structure data & integrations"
+    },
+
+    {
+        number: "04",
+        title: "Analysis",
+        description:
+            "I break the requirements into smaller technical tasks, evaluate possible approaches and select the technologies that best fit the project.",
+        tag: "Define the technical approach"
+    },
+
+    {
+        number: "05",
+        title: "Build",
+        description:
+            "I develop the solution using clean, maintainable code, integrate APIs and databases, and continuously test and refine the application.",
+        tag: "Develop & test"
+    },
+
+    {
+        number: "06",
+        title: "Solution",
+        description:
+            "I validate the completed solution against the original requirements and make improvements until the application delivers the intended result.",
+        tag: "Deliver a working solution"
+    }
+];
+
+let currentStep = 0;
+
+const layers = document.querySelectorAll(".process-layer");
+const stepNumber = document.getElementById("stepNumber");
+const stepLabel = document.getElementById("stepLabel");
+const stepTitle = document.getElementById("stepTitle");
+const stepDescription = document.getElementById("stepDescription");
+const stepTag = document.getElementById("stepTag");
+const progress = document.querySelectorAll(".process-progress span");
+const nextButton = document.getElementById("nextStep");
+const prevButton = document.getElementById("prevStep");
+
+
+function updateProcess(step) {
+    currentStep = step;
+    const data = processSteps[step];
+    stepNumber.textContent = data.number;
+    stepLabel.textContent =
+        `LAYER ${step + 1} OF ${processSteps.length}`;
+    stepTitle.textContent = data.title;
+    stepDescription.textContent =
+        data.description;
+    stepTag.textContent =
+        data.tag;
+
+    /* Active layer */
+
+    layers.forEach((layer, index) => {
+        layer.classList.toggle(
+            "active",
+            index === step
+        );
+    });
+
+    /* Progress */
+
+    progress.forEach((bar, index) => {
+        bar.classList.toggle(
+            "active",
+            index <= step
+        );
+    });
+
+    /* Disable buttons */
+
+    prevButton.disabled = step === 0;
+    nextButton.disabled =
+        step === processSteps.length - 1;
 }
 
-form.addEventListener("submit", function(e){
-    e.preventDefault();
-    emailsend();
+/* CLICK LAYER */
+
+layers.forEach((layer) => {
+    layer.addEventListener("click", () => {
+
+        const step =
+            parseInt(layer.dataset.step);
+
+        updateProcess(step);
+    });
 });
+
+/* NEXT */
+
+nextButton.addEventListener("click", () => {
+    if (currentStep < processSteps.length - 1) {
+        updateProcess(currentStep + 1);
+    }
+});
+
+/* BACK */
+
+prevButton.addEventListener("click", () => {
+    if (currentStep > 0) {
+        updateProcess(currentStep - 1);
+    }
+});
+
+/* INITIAL STATE */
+
+updateProcess(0);
