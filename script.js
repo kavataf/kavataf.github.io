@@ -14,10 +14,20 @@ $(function() {
     //jQuery for page scrolling feature - requires jQuery Easing plugin
     $(document).on('click', '.page-scroll a', function(event) {
         var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top
-        }, 1000, 'easeInOutExpo');
-        event.preventDefault();
+        var target = $anchor.attr('href');
+
+        // Only handle links pointing to sections on the current page
+        if (target && target.startsWith('#') && target.length > 1) {
+            var $target = $(target);
+
+            if ($target.length && $target.offset()) {
+                event.preventDefault();
+
+                $('html, body').stop().animate({
+                    scrollTop: $target.offset().top
+                }, 1000, 'easeInOutExpo');
+            }
+        }
     });
 
     // Highlight the top nav as scrolling occurs
@@ -26,23 +36,33 @@ $(function() {
         offset: 10
     });
 
-	/* Progress bar */
+
+    /* Progress bar */
     var $section = $('.section-skills');
     function loadDaBars() {
-	    $('.progress .progress-bar').progressbar({
-	        transition_delay: 500
-	    });
+        $('.progress .progress-bar').progressbar({
+            transition_delay: 500
+        });
     }
-    
-    $(document).bind('scroll', function(ev) {
-        var scrollOffset = $(document).scrollTop();
-        var containerOffset = $section.offset().top - window.innerHeight;
-        if (scrollOffset > containerOffset) {
-            loadDaBars();
-            // unbind event not to load scrolsl again
-            $(document).unbind('scroll');
+
+    if ($section.length) {
+        function checkSkillSection() {
+            var sectionOffset = $section.offset();
+
+            if (!sectionOffset) return;
+
+            var scrollOffset = $(document).scrollTop();
+            var containerOffset = sectionOffset.top - window.innerHeight;
+
+            if (scrollOffset > containerOffset) {
+                loadDaBars();
+                $(document).off('scroll', checkSkillSection);
+            }
         }
-    });
+
+        $(document).on('scroll', checkSkillSection);
+        checkSkillSection();
+    }
 
     /* Counters  */
     if ($(".section-counters .start").length>0) {
