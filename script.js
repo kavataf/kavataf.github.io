@@ -88,33 +88,6 @@ $(function() {
     });
     
 });
-// const form = document.querySelector("#form");
-// const Name = document.querySelector(".name");
-// const email = document.querySelector(".email");
-// const message = document.querySelector(".message");
-
-// const messagebody = `name: ${Name.value} <br> email: ${email.value} <br> message: ${message.value}`;
-
-// function emailsend(){
-
-//     Email.send({
-//         Host : "smtp.elasticemail.com",
-//         Username : "kavatafaith412@gmail.com",
-//         Password : "C6361C3D4FAEB9D960AF8D053311DB2B94C4",
-//         To : 'kavatafaith412@gmail.com',
-//         From : "kavatafaith412@gmail.com", 
-//         Body : messagebody
-//     }).then(
-//       message => alert(message = "Message not sent successfully!")
-      
-//     );
-// }
-
-// form.addEventListener("submit", function(e){
-//     e.preventDefault();
-//     emailsend();
-// });
-
 
 // process stack 
 
@@ -249,3 +222,33 @@ prevButton.addEventListener("click", () => {
 /* INITIAL STATE */
 
 updateProcess(0);
+
+// featured projects filter
+document.addEventListener("DOMContentLoaded", function () {
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const projects = document.querySelectorAll(".project-item");
+
+    filterButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            const selectedCategory = this.dataset.filter;
+            // Update active button
+            filterButtons.forEach(function (btn) {
+                btn.classList.remove("active");
+            });
+            this.classList.add("active");
+            // Filter projects
+            projects.forEach(function (project) {
+                const projectCategory = project.dataset.category;
+                if (
+                    selectedCategory === "all" ||
+                    projectCategory === selectedCategory
+                ) {
+                    project.classList.remove("is-hidden");
+                } else {
+                    project.classList.add("is-hidden");
+                }
+            });
+        });
+    });
+});
+
