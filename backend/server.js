@@ -1,47 +1,40 @@
 require("dotenv").config();
 const express = require("express");
-const nodemailer = require("nodemailer");
 const cors = require("cors");
-const dns = require("dns");
-
-dns.setDefaultResultOrder("ipv4first");
+const { Resend } = require("resend");
 
 const app = express();
 
 app.use(express.json({ limit: "10kb" }));
 
+// Allow your deployed portfolio and local development frontend.
+const allowedOrigins = (process.env.FRONTEND_ORIGIN || "")
+    .split(",")
+    .map(origin => origin.trim())
+    .filter(Boolean);
+
 app.use(cors({
-    origin: process.env.FRONTEND_ORIGIN
+    origin: function (origin, callback) {
+        // Allow requests without an Origin header, such as health checks.
+        if (!origin || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+
+        return callback(new Error("Origin not allowed by CORS"));
+    }
 }));
 
-const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
-    requireTLS: true,
-    auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-    }
-});
-
-transporter.verify()
-    .then(() => {
-        console.log("Gmail SMTP connection successful");
-    })
-    .catch((error) => {
-        console.error("Gmail SMTP verification failed:", error);
-    });
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.get("/", (req, res) => {
     res.send("Portfolio email API is running.");
 });
 
 app.post("/api/contact", async (req, res) => {
-    console.log("Contact form request received");
     try {
         const { name, email, subject, message } = req.body;
 
+        // Validate required fields.
         if (![name, email, subject, message].every(
             value => typeof value === "string" && value.trim()
         )) {
@@ -51,6 +44,7 @@ app.post("/api/contact", async (req, res) => {
             });
         }
 
+        // Limit input lengths.
         if (
             name.length > 100 ||
             email.length > 254 ||
@@ -63,35 +57,63 @@ app.post("/api/contact", async (req, res) => {
             });
         }
 
+        const cleanName = name.trim();
         const cleanEmail = email.trim();
+        const cleanSubject = subject.trim();
+        const cleanMessage = message.trim();
+
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
             return res.status(400).json({
                 success: false,
                 message: "Please enter a valid email address."
             });
         }
-        await transporter.sendMail({
-            from: process.env.SMTP_USER,
-            to: process.env.RECEIVER_EMAIL,
+
+        if (!process.env.RESEND_API_KEY || !process.env.RECEIVER_EMAIL) {
+            console.error("Missing required email environment variables.");
+
+            return res.status(500).json({
+                success: false,
+                message: "Email service is not configured."
+            });
+        }
+
+        const { data, error } = await resend.emails.send({
+            // Resend's testing sender; verify a domain for production.
+            from: "Portfolio Contact <onboarding@resend.dev>",
+            to: [process.env.RECEIVER_EMAIL],
             replyTo: cleanEmail,
-            subject: `${subject.trim()}`,
+            subject: `Portfolio Contact: ${cleanSubject}`,
             text: [
-                `Name: ${name.trim()}`,
+                `Name: ${cleanName}`,
                 `Email: ${cleanEmail}`,
-                `Subject: ${subject.trim()}`,
+                `Subject: ${cleanSubject}`,
                 "",
                 "Message:",
-                message.trim()
+                cleanMessage
             ].join("\n")
         });
 
-        res.status(200).json({
+        if (error) {
+            console.error("Resend email error:", error);
+
+            return res.status(502).json({
+                success: false,
+                message: "Unable to send your message. Please try again later."
+            });
+        }
+
+        console.log("Contact email accepted by Resend:", data?.id);
+
+        return res.status(200).json({
             success: true,
             message: "Your message has been sent successfully!"
         });
+
     } catch (error) {
-        console.error("Email sending failed:", error);
-        res.status(500).json({
+        console.error("Contact form error:", error);
+
+        return res.status(500).json({
             success: false,
             message: "Unable to send your message. Please try again later."
         });
