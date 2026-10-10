@@ -20,13 +20,18 @@ contactForm.addEventListener("submit", async (event) => {
     sendBtn.disabled = true;
 
     try {
-        const response = await fetch("http://localhost:5000/api/contact", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(formData)
-        });
+        const response = await fetch("https://kavataf-github-io.onrender.com/api/contact", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name: formData.name,
+                        email: formData.email,
+                        subject: formData.subject,
+                        message: formData.message
+                    })
+                });
 
         const result = await response.json();
 

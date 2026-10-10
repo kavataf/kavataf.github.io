@@ -83,12 +83,10 @@ app.post("/api/contact", async (req, res) => {
             from: "Portfolio Contact <onboarding@resend.dev>",
             to: [process.env.RECEIVER_EMAIL],
             replyTo: cleanEmail,
-            subject: `Portfolio Contact: ${cleanSubject}`,
+            subject: `${cleanSubject}`,
             text: [
                 `Name: ${cleanName}`,
                 `Email: ${cleanEmail}`,
-                `Subject: ${cleanSubject}`,
-                "",
                 "Message:",
                 cleanMessage
             ].join("\n")
